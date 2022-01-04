@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    int number1;
-    int number2;
-    int result;
+    double number1;
+    double number2;
+    double result;
     String operation;
 
     @Override
@@ -28,15 +28,16 @@ public class MainActivity extends AppCompatActivity {
         final Button clear = findViewById(R.id.clear);
         final TextView resultBar = findViewById(R.id.resultBar);
         final EditText enterBar = findViewById(R.id.enterBar);
+        final Button fakt = findViewById(R.id.butonFakt);
 
         sum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (enterBar.getText().toString().matches("")){
+                if (enterBar.getText().toString().matches("" )){
                     enterBar.setHint("Enter Number!");
                 }else {
                     resultBar.setText("");
-                    number1 = Integer.parseInt(enterBar.getText().toString());
+                    number1 = Double.parseDouble(enterBar.getText().toString());
                     resultBar.setText(number1+resultBar.getText().toString());
                     enterBar.setText("");
                     operation = "+";
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     enterBar.setHint("Enter Number!");
                 }else {
                     resultBar.setText("");
-                    number1 = Integer.parseInt(enterBar.getText().toString());
+                    number1 = Double.parseDouble(enterBar.getText().toString());
                     resultBar.setText(number1+resultBar.getText().toString());
                     enterBar.setText("");
                     operation = "-";
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     enterBar.setHint("Enter Number!");
                 }else {
                     resultBar.setText("");
-                    number1 = Integer.parseInt(enterBar.getText().toString());
+                    number1 = Double.parseDouble(enterBar.getText().toString());
                     resultBar.setText(number1+resultBar.getText().toString());
                     enterBar.setText("");
                     operation = "*";
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     enterBar.setHint("Enter Number!");
                 }else {
                     resultBar.setText("");
-                    number1 = Integer.parseInt(enterBar.getText().toString());
+                    number1 = Double.parseDouble(enterBar.getText().toString());
                     resultBar.setText(number1+resultBar.getText().toString());
                     enterBar.setText("");
                     operation = "/";
@@ -89,32 +90,55 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        fakt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (enterBar.getText().toString().matches("")){
+                    enterBar.setHint("Enter Number!");
+                    enterBar.setText("");
+                }else {
+                    int lastFakt = 1;
+                    resultBar.setText("");
+                    number1 = Integer.parseInt(enterBar.getText().toString());
+                    for (int i = 1; i <= number1; i++) {
+                        lastFakt = i * lastFakt;
+                    }
+                    resultBar.setText(lastFakt+resultBar.getText().toString());
+                    enterBar.setText("");
+                }
+            }
+        });
+
         equal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (enterBar.getText().toString().matches("")){
+                    enterBar.setHint("Enter Number!");
+                }else {
+
                 number2 = Integer.parseInt(enterBar.getText().toString());
 
                 switch (operation){
                     case "+":
-                        number1 = Integer.parseInt(resultBar.getText().toString());
+                        number1 = Double.parseDouble(resultBar.getText().toString());
                         resultBar.setText("");
                         enterBar.setText("");
                         result=number1+number2;
                         break;
                     case "-":
-                        number1 = Integer.parseInt(resultBar.getText().toString());
+                        number1 = Double.parseDouble(resultBar.getText().toString());
                         resultBar.setText("");
                         enterBar.setText("");
                         result=number1-number2;
                         break;
                     case "*":
-                        number1 = Integer.parseInt(resultBar.getText().toString());
+                        number1 = Double.parseDouble(resultBar.getText().toString());
                         resultBar.setText("");
                         enterBar.setText("");
                         result=number1*number2;
                         break;
                     case "/":
-                        number1 = Integer.parseInt(resultBar.getText().toString());
+                        number1 = Double.parseDouble(resultBar.getText().toString());
                         resultBar.setText("");
                         enterBar.setText("");
                         result=number1/number2;
@@ -122,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 resultBar.setText(result+resultBar.getText().toString());
+                }
             }
         });
 
